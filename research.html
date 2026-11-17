@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Gia Phat Dang</title>
+<meta name="description" content="Research by Gia Phat Dang: quantum homomorphic encryption on real IBM hardware, post-quantum migration for healthcare, and verifying quantum cryptography claims.">
+<meta name="author" content="Gia Phat Dang">
+<link rel="canonical" href="https://gia-dang-site.vercel.app/research.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBFAF7'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%234A3FD0'%3EG%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#4A3FD0">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gia Phat Dang">
+<meta property="og:title" content="Research — Gia Phat Dang">
+<meta property="og:description" content="Research by Gia Phat Dang: quantum homomorphic encryption on real IBM hardware, post-quantum migration for healthcare, and verifying quantum cryptography claims.">
+<meta property="og:url" content="https://gia-dang-site.vercel.app/research.html">
+<meta property="og:locale" content="en_AU">
+<meta property="og:locale:alternate" content="vi_VN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Research — Gia Phat Dang">
+<meta name="twitter:description" content="Research by Gia Phat Dang: quantum homomorphic encryption on real IBM hardware, post-quantum migration for healthcare, and verifying quantum cryptography claims.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-lang="en">
+<a class="skip" href="#main"><span class="en">Skip to content</span><span class="vi">Chuyển đến nội dung</span></a>
+
+<nav class="site" aria-label="Main">
+  <div class="nav-inner">
+    <a class="nav-name" href="index.html">Gia Phat Dang</a>
+    <a href="research.html"><span class="en">Research</span><span class="vi">Nghiên cứu</span></a>
+    <a href="publications.html"><span class="en">Publications</span><span class="vi">Công bố</span></a>
+    <a href="projects.html"><span class="en">Projects</span><span class="vi">Dự án</span></a>
+    <a href="software.html"><span class="en">Software</span><span class="vi">Phần mềm</span></a>
+    <a href="teaching.html"><span class="en">Teaching</span><span class="vi">Giảng dạy</span></a>
+    <a href="cv.html">CV</a>
+    <span class="lang" role="group" aria-label="Language"><button data-set="en" aria-pressed="true">EN</button><button data-set="vi" aria-pressed="false">VI</button></span>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="page-head wrap">
+  <h1><span class="en">Research</span><span class="vi">Nghiên cứu</span></h1>
+  <p class="en">This is a quantum cybersecurity and systems thesis, not a quantum-information-theory thesis. The novelty sits in the security argument, in integrating published primitives into a working protocol, in characterising what hardware can actually run, and in the verification discipline that makes the results trustworthy.</p>
+  <p class="vi">Đây là luận án về an ninh mạng lượng tử và hệ thống, không phải luận án lý thuyết thông tin lượng tử. Tính mới nằm ở lập luận an toàn, ở việc ghép các thành phần cơ sở (primitive) đã công bố thành một giao thức chạy được, ở việc xác định phần cứng thực sự chạy được những gì, và ở quy trình kiểm chứng chặt chẽ giúp kết quả đáng tin cậy.</p>
+</header>
+
+<section id="qhe" class="wrap">
+  <h2><span class="en">Quantum homomorphic encryption on real hardware</span><span class="vi">Mã hóa đồng cấu lượng tử trên phần cứng thật</span></h2>
+  <div class="prose en">
+    <p><strong>The problem.</strong> A client wants a quantum server to compute on their data without the server learning the input. Existing QHE constructions pay for every non-Clifford gate (the T gate) with a fresh pair of entangled ancilla qubits, so the qubit cost grows with the circuit: Q = n + 2L + 3 for L T-gates. On a 156-qubit processor that budget runs out fast.</p>
+    <p><strong>What I built.</strong> A Bell-register reuse construction that measures and resets the same ancilla pair every round, with Pauli-frame key tracking so the client's decryption key stays correct. Ancilla overhead drops from O(L) to O(1): measured as fresh = 2 × T-count, reuse = 2, flat, at three circuit scales. The security argument (q-IND-CPA under reuse) is where the real contribution lives — reuse introduces a reset assumption that fresh-pair schemes never need, and the cross-round key correlation has to be shown not to leak.</p>
+    <p><strong>What the hardware says.</strong> Validated on ibm_brisbane (Eagle) and ibm_kingston (Heron). 36/36 locked correctness tests; Tier A of the QASMBench Clifford+T suite 5/5; adder_n10 passes at 56 T-gates where a prior published threshold was 14–17. Circuit optimisation delivered 50% fewer T-gates and 37% less depth; an error-suppression pipeline (dynamical decoupling, Pauli twirling, zero-noise extrapolation) gave a 3–6× accuracy improvement.</p>
+    <p><strong>The honest boundary.</strong> On Kingston-class hardware, reuse becomes <em>necessary</em> only beyond ~74 T-gates, but coherence already fails at ~24. Reuse trades an abundant resource (qubits) for the scarce one (time). That negative result — the k* space–time crossover — is a thesis chapter in its own right, and it is why I do not describe this work as "practical" or "deployment-ready".</p>
+  </div>
+  <div class="prose vi">
+    <p><strong>Bài toán.</strong> Khách hàng muốn máy chủ lượng tử tính toán trên dữ liệu của mình mà máy chủ không biết được đầu vào. Các cấu trúc QHE hiện có phải trả cho mỗi cổng phi-Clifford (cổng T) một cặp qubit ancilla vướng víu mới, nên số qubit cần dùng tăng theo kích thước mạch: Q = n + 2L + 3 với L cổng T. Trên bộ xử lý 156 qubit, ngân sách này hết rất nhanh.</p>
+    <p><strong>Những gì tôi xây dựng.</strong> Cấu trúc tái sử dụng thanh ghi Bell: đo rồi đặt lại cùng một cặp ancilla ở mỗi vòng, kèm cơ chế theo dõi khóa bằng khung Pauli (Pauli frame) để khóa giải mã của khách hàng luôn đúng. Chi phí ancilla giảm từ O(L) xuống O(1): đo được với cặp mới = 2 × số cổng T, với tái sử dụng = 2 và không đổi, ở ba quy mô mạch. Đóng góp thực sự nằm ở lập luận an toàn (q-IND-CPA khi tái sử dụng) — việc tái sử dụng kéo theo một giả định về phép đặt lại mà các lược đồ dùng cặp mới không cần, và phải chứng minh được rằng tương quan khóa giữa các vòng không làm rò rỉ thông tin.</p>
+    <p><strong>Kết quả trên phần cứng.</strong> Kiểm chứng trên ibm_brisbane (Eagle) và ibm_kingston (Heron). 36/36 bài kiểm thử tính đúng cố định; Tier A của bộ QASMBench Clifford+T đạt 5/5; adder_n10 vẫn đạt ở 56 cổng T trong khi ngưỡng được công bố trước đó là 14–17. Tối ưu mạch giảm 50% cổng T và 37% độ sâu; quy trình giảm lỗi (dynamical decoupling, Pauli twirling, zero-noise extrapolation) cải thiện độ chính xác 3–6 lần.</p>
+    <p><strong>Nói rõ giới hạn.</strong> Trên phần cứng lớp Kingston, tái sử dụng chỉ trở nên <em>cần thiết</em> từ khoảng 74 cổng T, nhưng tính kết hợp (coherence) đã mất từ khoảng 24. Tái sử dụng đổi tài nguyên dồi dào (qubit) lấy tài nguyên khan hiếm (thời gian). Kết quả phủ định này — điểm giao không gian–thời gian k* — là một chương riêng của luận án, và là lý do tôi không gọi công trình này là "thực tiễn" hay "sẵn sàng triển khai".</p>
+  </div>
+
+  <h3 style="font-family:var(--serif);font-weight:600;font-size:1.1rem;margin:30px 0 10px"><span class="en">Thesis spine — three papers</span><span class="vi">Mạch chính của luận án — ba bài báo</span></h3>
+  <div class="spine">
+    <div class="box">
+      <p class="k"><span class="en">Paper 1 · the protocol is sound</span><span class="vi">Bài 1 · giao thức đúng đắn</span></p>
+      <p class="t"><span class="en">O(1) Bell reuse and q-IND-CPA under reuse</span><span class="vi">Tái sử dụng Bell O(1) và q-IND-CPA khi tái sử dụng</span></p>
+      <p class="d"><span class="en">Security proof, correctness across the Clifford+T stratum of QASMBench, hardware characterisation.</span><span class="vi">Chứng minh an toàn, tính đúng trên tầng Clifford+T của QASMBench, đặc tả phần cứng.</span></p>
+    </div>
+    <div class="box">
+      <p class="k"><span class="en">Paper 2 · reaches any circuit</span><span class="vi">Bài 2 · áp dụng cho mọi mạch</span></p>
+      <p class="t"><span class="en">Nested gadgets for dyadic rotations; the gate-algebra boundary</span><span class="vi">Gadget lồng nhau cho phép quay dyadic; giới hạn của đại số cổng</span></p>
+      <p class="d"><span class="en">A pure key-update rule exists iff the byproduct is Clifford iff θ ∈ (π/4)·ℤ — so QFT, PEA and Shor need nested constructions.</span><span class="vi">Quy tắc cập nhật khóa thuần túy tồn tại khi và chỉ khi toán tử phụ sinh (byproduct) là Clifford, khi và chỉ khi θ ∈ (π/4)·ℤ — vì vậy QFT, PEA và Shor cần cấu trúc lồng nhau.</span></p>
+    </div>
+    <div class="box current">
+      <p class="k"><span class="en">Paper 3 · where it actually runs</span><span class="vi">Bài 3 · nơi giao thức thực sự chạy được</span></p>
+      <p class="t"><span class="en">The k* space–time frontier</span><span class="vi">Biên không gian–thời gian k*</span></p>
+      <p class="d"><span class="en">Bell reuse (k=1) and prior art (k=L) are two endpoints of one curve; fidelity is unimodal in k. QHE resource analysis in the literature is entirely spatial — nobody models time. This is the thesis's strongest novelty.</span><span class="vi">Tái sử dụng Bell (k=1) và các công trình trước (k=L) là hai đầu mút của cùng một đường cong; độ trung thực là hàm đơn đỉnh theo k. Các phân tích tài nguyên QHE đã công bố đều chỉ xét không gian — chưa ai mô hình hóa yếu tố thời gian. Đây là tính mới mạnh nhất của luận án.</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="pqc" class="wrap">
+  <h2><span class="en">Post-quantum migration for healthcare</span><span class="vi">Chuyển đổi hậu lượng tử cho y tế</span></h2>
+  <div class="prose en">
+    <p>With SWERI (Ingham Institute / South Western Sydney Local Health District) I lead a research programme on what it actually costs a hospital network serving 500,000+ patients to migrate to NIST's post-quantum standards — and in what order.</p>
+    <p><strong>Measured, not asserted.</strong> All 94 algorithms in liboqs 0.14.0 benchmarked on ARM64 across six clinical use cases (EHR TLS sessions, long-term records, clinical code signing, medical IoT authentication, root CA, inter-hospital key exchange). Hybrid X25519 + ML-KEM-768 adds +0.128 ms per handshake; at 1,000 concurrent users P99 latency is 71 ms for both classical and hybrid, across 180,423 requests with zero failures. Falcon-512's 656-byte signature versus ML-DSA-65's 3,309 bytes is the decisive factor for sub-1 KB packet budgets on infusion pumps and telemetry.</p>
+    <p><strong>Tooling.</strong> An automated CBOM scanner (Python AST → prioritised crypto inventory), a certificate scanner with expiry-aware priority escalation, and a crypto-agility engine where swapping ML-DSA-65 for Falcon-512 is a one-line config change. Plus quantum-secure genomic DNA alignment using homomorphic Toffoli logic for privacy-preserving mismatch detection on an untrusted server.</p>
+    <p><strong>Roadmap.</strong> A four-phase, 60-month migration plan mapped to APRA CPG 234, NIST IR 8547, the EU PQC roadmap and ASD ISM, with P0 = pathology-archive RSA-2048 key wrapping (harvest-now-decrypt-later critical). The framework is public as <a href="software.html">HealthPQC</a>. Research-grade: none of it has touched a production SWSLHD system yet, and I say so.</p>
+  </div>
+  <div class="prose vi">
+    <p>Cùng SWERI (Viện Ingham / Khu Y tế Tây Nam Sydney – SWSLHD), tôi dẫn dắt chương trình nghiên cứu về việc một mạng lưới bệnh viện phục vụ hơn 500.000 bệnh nhân thực sự tốn bao nhiêu để chuyển sang các chuẩn hậu lượng tử của NIST — và nên chuyển theo thứ tự nào.</p>
+    <p><strong>Đo lường, không khẳng định suông.</strong> Toàn bộ 94 thuật toán trong liboqs 0.14.0 được đo trên ARM64 cho sáu tình huống lâm sàng (phiên TLS của hồ sơ bệnh án điện tử, lưu trữ dài hạn, ký mã phần mềm lâm sàng, xác thực IoT y tế, CA gốc, trao đổi khóa giữa các bệnh viện). TLS lai X25519 + ML-KEM-768 chỉ thêm 0,128 ms cho mỗi lần bắt tay; với 1.000 người dùng đồng thời, P99 là 71 ms cho cả cấu hình cổ điển lẫn lai, qua 180.423 yêu cầu và không có lỗi nào. Chữ ký 656 byte của Falcon-512 so với 3.309 byte của ML-DSA-65 là yếu tố quyết định khi gói tin bị giới hạn dưới 1 KB trên bơm truyền dịch và thiết bị đo từ xa.</p>
+    <p><strong>Công cụ.</strong> Bộ quét CBOM tự động (Python AST → danh mục mật mã có xếp hạng ưu tiên), bộ quét chứng chỉ tự nâng mức ưu tiên khi gần hết hạn, và engine crypto-agility trong đó việc đổi ML-DSA-65 sang Falcon-512 chỉ là sửa một dòng cấu hình. Ngoài ra còn có so khớp trình tự DNA an toàn lượng tử, dùng logic Toffoli đồng cấu để phát hiện sai khác mà vẫn giữ bí mật dữ liệu trên máy chủ không tin cậy.</p>
+    <p><strong>Lộ trình.</strong> Kế hoạch chuyển đổi bốn giai đoạn trong 60 tháng, đối chiếu với APRA CPG 234, NIST IR 8547, lộ trình PQC của EU và ASD ISM, trong đó P0 = cơ chế bọc khóa RSA-2048 của kho lưu trữ giải phẫu bệnh (rủi ro nghiêm trọng kiểu “thu thập trước, giải mã sau”). Khung này được công khai với tên <a href="software.html">HealthPQC</a>. Đây mới là kết quả nghiên cứu: chưa có phần nào được áp dụng vào hệ thống vận hành của SWSLHD, và tôi nói rõ điều đó.</p>
+  </div>
+</section>
+
+<section id="verify" class="wrap">
+  <h2><span class="en">Verifying quantum cryptography claims</span><span class="vi">Kiểm chứng tuyên bố mật mã lượng tử</span></h2>
+  <div class="prose en">
+    <p>Months into the thesis I found that a QHE gadget silently computing T† instead of T had passed every test I had. That led to a systematic question: in how many ways can a standard correctness test be satisfied by a broken quantum protocol? Six, so far:</p>
+  </div>
+  <div class="prose vi">
+    <p>Sau vài tháng làm luận án, tôi phát hiện một gadget QHE âm thầm tính T† thay vì T mà vẫn vượt qua mọi bài kiểm thử tôi có. Điều đó dẫn tới một câu hỏi có hệ thống: có bao nhiêu cách để một giao thức lượng tử bị lỗi vẫn vượt qua bài kiểm thử tính đúng thông thường? Đến nay là sáu:</p>
+  </div>
+  <table class="standards" style="margin-top:14px">
+    <thead><tr><th scope="col">#</th><th scope="col"><span class="en">Mechanism</span><span class="vi">Cơ chế</span></th><th scope="col"><span class="en">What it hides</span><span class="vi">Điều bị che giấu</span></th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><span class="en">Per-qubit marginals</span><span class="vi">Phân phối biên theo từng qubit</span></td><td><span class="en">94–97% per-qubit while joint Hellinger fidelity was 0.67</span><span class="vi">94–97% theo từng qubit trong khi độ trung thực Hellinger trên phân phối đồng thời chỉ là 0,67</span></td></tr>
+      <tr><td>2</td><td><span class="en">Uniform ground truths</span><span class="vi">Đáp án chuẩn có phân phối đều</span></td><td><span class="en">A 25-test suite passed while provably vacuous</span><span class="vi">Bộ 25 bài kiểm thử vẫn đạt dù có thể chứng minh là không kiểm tra được gì</span></td></tr>
+      <tr><td>3</td><td><span class="en">Finite-sample bias</span><span class="vi">Thiên lệch mẫu hữu hạn</span></td><td><span class="en">Mimics decoherence; fixed with a same-shot-count plaintext floor</span><span class="vi">Trông giống hiện tượng mất kết hợp; khắc phục bằng mức nền bản rõ chạy cùng số shot</span></td></tr>
+      <tr><td>4</td><td><span class="en">Angle-even circuits</span><span class="vi">Mạch chẵn theo góc</span></td><td><span class="en">H·Rz(θ)·H is even in θ — T and T† give identical outputs</span><span class="vi">H·Rz(θ)·H là hàm chẵn theo θ — T và T† cho kết quả như nhau</span></td></tr>
+      <tr><td>5</td><td><span class="en">Self-comparing validation</span><span class="vi">Kiểm chứng tự so sánh</span></td><td><span class="en">Encrypted vs encrypted with the same keys measures only self-consistency</span><span class="vi">So bản mã hóa với bản mã hóa dùng cùng khóa chỉ đo được tính tự nhất quán</span></td></tr>
+      <tr><td>6</td><td><span class="en">Plaintext self-flip Δ ≈ 0</span><span class="vi">Δ tự lật bản rõ ≈ 0</span></td><td><span class="en">That qubit is unverifiable by that circuit, whatever the result says</span><span class="vi">Mạch đó không thể kiểm chứng qubit đó, bất kể kết quả cho thấy gì</span></td></tr>
+    </tbody>
+  </table>
+  <div class="prose en" style="margin-top:18px">
+    <p>Every test in my harness must be immune to all six, and every test carries a mandatory corruption check: flip one bit of the decryption key and re-run — if the result does not move, the test proves nothing. The same discipline carried into consulting, where a pre-registered falsification test showed a classical heuristic winning through search-space restriction rather than search quality.</p>
+  </div>
+  <div class="prose vi" style="margin-top:18px">
+    <p>Mọi bài kiểm thử trong bộ công cụ của tôi phải miễn nhiễm với cả sáu cơ chế, và mỗi bài đều bắt buộc có bước kiểm tra với khóa bị làm hỏng: lật một bit của khóa giải mã rồi chạy lại — nếu kết quả không thay đổi, bài kiểm thử đó không chứng minh được gì. Nguyên tắc này cũng được áp dụng trong tư vấn, nơi một phép kiểm định bác bỏ (falsification test) đăng ký trước cho thấy heuristic cổ điển thắng nhờ thu hẹp không gian tìm kiếm chứ không phải nhờ tìm kiếm tốt hơn.</p>
+  </div>
+</section>
+
+<section id="standards" class="wrap">
+  <h2><span class="en">Standards &amp; compliance I have benchmarked against</span><span class="vi">Chuẩn &amp; quy định đã đối chiếu</span></h2>
+  <table class="standards">
+    <thead><tr><th scope="col"><span class="en">Standard</span><span class="vi">Chuẩn</span></th><th scope="col"><span class="en">Body</span><span class="vi">Tổ chức</span></th><th scope="col"><span class="en">How it enters my work</span><span class="vi">Vai trò trong công việc</span></th></tr></thead>
+    <tbody>
+      <tr><td>FIPS 203 · ML-KEM</td><td>NIST</td><td><span class="en">Benchmarked at 512/768/1024; hybrid TLS with X25519; constrained-device profile</span><span class="vi">Đo ở 512/768/1024; TLS lai với X25519; cấu hình thiết bị hạn chế</span></td></tr>
+      <tr><td>FIPS 204 · ML-DSA</td><td>NIST</td><td><span class="en">Clinical code signing and root CA; dual-signature (ML-DSA-65 + ECDSA P-384) policy records</span><span class="vi">Ký mã lâm sàng và CA gốc; bản ghi chính sách ký đôi (ML-DSA-65 + ECDSA P-384)</span></td></tr>
+      <tr><td>FIPS 205 · SLH-DSA</td><td>NIST</td><td><span class="en">Evaluated; excluded from real-time auth on Cortex-M4 (7.2 s signing)</span><span class="vi">Đã đánh giá; loại khỏi xác thực thời gian thực trên Cortex-M4 (ký 7,2 s)</span></td></tr>
+      <tr><td>FIPS 206 · FN-DSA (Falcon)</td><td>NIST</td><td><span class="en">Medical IoT authentication — 656 B signatures for sub-1 KB budgets</span><span class="vi">Xác thực IoT y tế — chữ ký 656 B cho ngân sách dưới 1 KB</span></td></tr>
+      <tr><td>NIST IR 8547</td><td>NIST</td><td><span class="en">2030 deprecation / 2035 disallowed timeline anchors the migration roadmap</span><span class="vi">Mốc ngừng khuyến nghị 2030 / cấm sử dụng 2035 là mốc neo cho lộ trình chuyển đổi</span></td></tr>
+      <tr><td>APRA CPG 234</td><td>Australia</td><td><span class="en">Risk-based information security; quantum explicitly in scope for health-sector entities</span><span class="vi">An toàn thông tin dựa trên rủi ro; rủi ro lượng tử được đưa rõ vào phạm vi áp dụng cho các đơn vị y tế</span></td></tr>
+      <tr><td>ASD ISM / Essential Eight</td><td>Australia</td><td><span class="en">Version- and date-aware ("as-of") retrieval over the OSCAL release in the policy-gate prototype</span><span class="vi">Truy xuất theo phiên bản và ngày ("tính đến") trên bản OSCAL trong nguyên mẫu cổng chính sách</span></td></tr>
+      <tr><td>NSA CNSA 2.0 · UK NCSC · EU PQC roadmap</td><td>—</td><td><span class="en">Harmonisation matrix; healthcare classed high-risk for 2030 migration</span><span class="vi">Ma trận đối chiếu các chuẩn; y tế được xếp nhóm rủi ro cao cho mốc chuyển đổi 2030</span></td></tr>
+      <tr><td><span class="en">Privacy Act 1988 · My Health Records Act</span><span class="vi">Đạo luật Quyền riêng tư 1988 · Đạo luật My Health Records</span></td><td>Australia</td><td><span class="en">Data-sensitivity classification driving P0–P3 migration priority</span><span class="vi">Phân loại mức độ nhạy cảm của dữ liệu quyết định thứ tự ưu tiên chuyển đổi P0–P3</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="safeconsult" class="wrap">
+  <h2>SafeConsult — <span class="en">the applied direction</span><span class="vi">hướng ứng dụng</span></h2>
+  <div class="prose en">
+    <p>The long-term goal behind the thesis is privacy-preserving computation on clinical and genomic data — a hub that computes on a clinic's encrypted data and returns a result only the clinic can decrypt. Fault-tolerant hardware for production QHE is a 10–20 year horizon, so the 2027 demonstrator builds on classical FHE (TFHE via Concrete ML, 72/72 slots in a client/server split) with quantum layers as proof-of-concept, applied to a clinical cohort query and genomic sequence matching (1,024 bases of phiX174). Claim limits are documented in the repos: correct encrypted computation with a measured privacy boundary, not privacy from the hub.</p>
+  </div>
+  <div class="prose vi">
+    <p>Mục tiêu dài hạn đằng sau luận án là tính toán bảo toàn quyền riêng tư trên dữ liệu lâm sàng và dữ liệu gen — một trung tâm (hub) tính toán trên dữ liệu đã mã hóa của phòng khám và trả về kết quả mà chỉ phòng khám giải mã được. Phần cứng chịu lỗi đủ để chạy QHE ở mức sản xuất vẫn còn cách 10–20 năm, nên bản trình diễn 2027 xây trên FHE cổ điển (TFHE qua Concrete ML, 72/72 slot theo mô hình khách/chủ) với các lớp lượng tử làm bằng chứng khái niệm, áp dụng cho truy vấn nhóm bệnh nhân và so khớp trình tự gen (1.024 base của phiX174). Giới hạn của các tuyên bố được ghi rõ trong các repo: tính toán trên dữ liệu mã hóa cho kết quả đúng, với ranh giới quyền riêng tư đo được — chứ không phải giữ bí mật được với chính trung tâm.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="https://www.linkedin.com/in/gia-phat-dang-303866193" rel="me">LinkedIn</a>
+    <a href="https://github.com/GiaDang-GCT-TG-VN" rel="me">GitHub</a>
+  </div>
+  <p class="foot-email">30070831@westernsydney.edu.au</p>
+  <p><span class="en">© 2026 Gia Phat Dang · Sydney, Australia</span><span class="vi">© 2026 Gia Phat Dang · Sydney, Úc</span></p>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>

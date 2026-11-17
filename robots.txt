@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gia-dang-site.vercel.app/sitemap.xml

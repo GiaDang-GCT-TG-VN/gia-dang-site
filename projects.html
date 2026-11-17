@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Gia Phat Dang</title>
+<meta name="description" content="Quantum consulting and research prototypes by Gia Phat Dang — what was measured and what each client got, including the negative results.">
+<meta name="author" content="Gia Phat Dang">
+<link rel="canonical" href="https://gia-dang-site.vercel.app/projects.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBFAF7'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%234A3FD0'%3EG%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#4A3FD0">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gia Phat Dang">
+<meta property="og:title" content="Projects — Gia Phat Dang">
+<meta property="og:description" content="Quantum consulting and research prototypes by Gia Phat Dang — what was measured and what each client got, including the negative results.">
+<meta property="og:url" content="https://gia-dang-site.vercel.app/projects.html">
+<meta property="og:locale" content="en_AU">
+<meta property="og:locale:alternate" content="vi_VN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Projects — Gia Phat Dang">
+<meta name="twitter:description" content="Quantum consulting and research prototypes by Gia Phat Dang — what was measured and what each client got, including the negative results.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-lang="en">
+<a class="skip" href="#main"><span class="en">Skip to content</span><span class="vi">Chuyển đến nội dung</span></a>
+
+<nav class="site" aria-label="Main">
+  <div class="nav-inner">
+    <a class="nav-name" href="index.html">Gia Phat Dang</a>
+    <a href="research.html"><span class="en">Research</span><span class="vi">Nghiên cứu</span></a>
+    <a href="publications.html"><span class="en">Publications</span><span class="vi">Công bố</span></a>
+    <a href="projects.html"><span class="en">Projects</span><span class="vi">Dự án</span></a>
+    <a href="software.html"><span class="en">Software</span><span class="vi">Phần mềm</span></a>
+    <a href="teaching.html"><span class="en">Teaching</span><span class="vi">Giảng dạy</span></a>
+    <a href="cv.html">CV</a>
+    <span class="lang" role="group" aria-label="Language"><button data-set="en" aria-pressed="true">EN</button><button data-set="vi" aria-pressed="false">VI</button></span>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="page-head wrap">
+  <h1><span class="en">Projects &amp; consulting</span><span class="vi">Dự án &amp; tư vấn</span></h1>
+  <p class="en">Commercial and research engagements where I was the quantum lead. Each entry states what was measured and what the client got — including the negative results.</p>
+  <p class="vi">Các dự án thương mại và nghiên cứu mà tôi phụ trách mảng lượng tử. Mỗi mục nêu rõ đã đo những gì và khách hàng nhận được gì — kể cả các kết quả phủ định.</p>
+</header>
+
+<section class="wrap">
+  <h2><span class="en">Quantum consulting</span><span class="vi">Tư vấn lượng tử</span></h2>
+
+  <article class="entry">
+    <p class="entry-dates">Jan — May 2026</p>
+    <h3><span class="en">Quantum feasibility for graph neural networks</span><span class="vi">Đánh giá khả thi lượng tử cho mạng nơ-ron đồ thị</span></h3>
+    <p class="org">Quantum DAO · PF-GNN engagement</p>
+    <p class="role-line"><span class="en">Role: Quantum computing consultant, hardware execution lead</span><span class="vi">Vai trò: Tư vấn tính toán lượng tử, phụ trách thực thi phần cứng</span></p>
+    <ul class="en">
+      <li>Three-milestone engagement — candidate assessment → complexity analysis → hardware execution — evaluating QAE-MCTS and QSVT for supply-chain and job-matching GNNs.</li>
+      <li>Executed <span class="metric">73 circuits</span> on IBM Heron through a CUDA-Q → OpenQASM 2 → Qiskit Runtime pipeline: <span class="metric">0.16% deviation</span> on QAE-MCTS, 4× accuracy on QSVT against baseline.</li>
+      <li>Characterised production oracle complexity at 7,975–30,199 two-qubit gates — <span class="metric">53–201×</span> the NISQ budget. Not obtainable from simulation; it converted an open feasibility question into a platform-selection decision.</li>
+      <li>Delivered ASIC platform analysis (trapped-ion, neutral-atom, co-processor) and a QSVT quantum-kernel roadmap grounded in measured hardware behaviour.</li>
+    </ul>
+    <ul class="vi">
+      <li>Dự án ba cột mốc — sàng lọc phương án → phân tích độ phức tạp → thực thi trên phần cứng — đánh giá QAE-MCTS và QSVT cho các GNN về chuỗi cung ứng và ghép nối việc làm.</li>
+      <li>Thực thi <span class="metric">73 mạch</span> trên IBM Heron qua pipeline CUDA-Q → OpenQASM 2 → Qiskit Runtime: <span class="metric">sai lệch 0,16%</span> trên QAE-MCTS, độ chính xác gấp 4 lần trên QSVT so với mô hình cơ sở.</li>
+      <li>Xác định độ phức tạp của oracle ở quy mô sản xuất là 7.975–30.199 cổng hai qubit — gấp <span class="metric">53–201 lần</span> ngân sách NISQ. Con số này không thể có được từ mô phỏng; nó biến một câu hỏi khả thi còn bỏ ngỏ thành quyết định lựa chọn nền tảng.</li>
+      <li>Bàn giao phân tích nền tảng ASIC (ion bẫy, nguyên tử trung hòa, bộ đồng xử lý) và lộ trình quantum kernel dựa trên QSVT, căn cứ vào hành vi phần cứng đo được.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <p class="entry-dates">Jul — Aug 2026</p>
+    <h3><span class="en">Quantum vs classical for genomic cardiovascular risk</span><span class="vi">Lượng tử và cổ điển trong dự báo nguy cơ tim mạch di truyền</span></h3>
+    <p class="org"><span class="en">Clinical research platform, New Zealand</span><span class="vi">Nền tảng nghiên cứu lâm sàng, New Zealand</span></p>
+    <p class="role-line"><span class="en">Role: Quantum feasibility consultant</span><span class="vi">Vai trò: Tư vấn khả thi lượng tử</span></p>
+    <ul class="en">
+      <li>Two-milestone study for a platform combining genotyping, gene-interaction detection, and a proposed federated architecture with post-quantum security.</li>
+      <li>Controlled benchmark: <span class="metric">25 instances × 5 seeds</span>, synthetic cohorts of 2,000 individuals with a planted interaction recoverable only from the data, ground truth by exact enumeration, four solvers on identical inputs including QAOA at three depths.</li>
+      <li>Negative result with a mechanism, not just an observation: a falsification test showed the classical heuristic won through search-space restriction, failing on <span class="metric">10 of 10</span> adversarially constructed instances.</li>
+      <li>Showed the conventional approximation-ratio metric cannot discriminate between solvers when a constraint penalty dominates the energy span; reported three pre-registered predictions as contradicted by measurement rather than revising them.</li>
+    </ul>
+    <ul class="vi">
+      <li>Nghiên cứu hai cột mốc cho một nền tảng kết hợp định kiểu gen, phát hiện tương tác gen và một kiến trúc liên kết (federated) được đề xuất, có bảo mật hậu lượng tử.</li>
+      <li>Benchmark có kiểm soát: <span class="metric">25 bài toán × 5 seed</span>, quần thể tổng hợp 2.000 cá thể với một tương tác cài sẵn chỉ có thể khôi phục từ dữ liệu, đáp án chuẩn tính bằng vét cạn, bốn bộ giải chạy trên cùng đầu vào, trong đó có QAOA ở ba độ sâu.</li>
+      <li>Kết quả phủ định có giải thích cơ chế, không chỉ là quan sát: một phép kiểm định bác bỏ cho thấy heuristic cổ điển thắng nhờ thu hẹp không gian tìm kiếm, và thất bại ở <span class="metric">10/10</span> bài toán đối kháng được xây dựng có chủ đích.</li>
+      <li>Chỉ ra rằng chỉ số tỉ lệ xấp xỉ thông thường không phân biệt được các bộ giải khi số hạng phạt ràng buộc chi phối khoảng năng lượng; báo cáo thẳng rằng ba dự đoán đã đăng ký trước bị kết quả đo bác bỏ, thay vì sửa lại dự đoán.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <p class="entry-dates"><span class="en">Aug 2026 — present · part-time</span><span class="vi">08/2026 — nay · bán thời gian</span></p>
+    <h3><span class="en">Quantum money benchmark on IBM hardware</span><span class="vi">Kiểm định tiền lượng tử trên phần cứng IBM</span></h3>
+    <p class="org"><span class="en">US fintech founder (client unnamed)</span><span class="vi">Nhà sáng lập fintech Mỹ (khách hàng không nêu tên)</span></p>
+    <p class="role-line"><span class="en">Role: Sole quantum consultant</span><span class="vi">Vai trò: Tư vấn lượng tử duy nhất</span></p>
+    <ul class="en">
+      <li>Wiesner-type private-key quantum money on a SHA-256 hash-chained tamper-evident ledger, following Coladangelo &amp; Sattath (Quantum, 2020).</li>
+      <li>Simulator: 36/36 results within 4σ of theory. ibm_kingston: 10-qubit notes accepted at <span class="metric">95.1%</span>, simple counterfeiter at 0.9%, 30/30 results inside pre-registered bands, 161 s of QPU time.</li>
+      <li>Found one qubit with <span class="metric">19× worse</span> readout than the vendor listing; ledger refused 99/99 second copies in a 1,200-note test; 168 tests and a 9-check verification gate proven by 31 tamper tests.</li>
+      <li>Implemented the optimal cloning attack via Stinespring isometry (verified to 1e-9); evaluated ML-DSA libraries; analysed Ethereum's quantum exposure (EIP-8141, EIP-8355). Live FastAPI demo on Railway; six-phase plan confirmed by the client in writing.</li>
+    </ul>
+    <ul class="vi">
+      <li>Tiền lượng tử khóa riêng kiểu Wiesner trên sổ cái chuỗi băm SHA-256 có khả năng phát hiện giả mạo, theo Coladangelo &amp; Sattath (Quantum, 2020).</li>
+      <li>Mô phỏng: 36/36 kết quả trong 4σ so với lý thuyết. ibm_kingston: tờ tiền 10 qubit được chấp nhận <span class="metric">95,1%</span>, kẻ làm giả đơn giản 0,9%, 30/30 kết quả nằm trong dải đăng ký trước, 161 s thời gian QPU.</li>
+      <li>Phát hiện một qubit có lỗi đọc (readout) <span class="metric">tệ hơn 19 lần</span> so với thông số nhà cung cấp công bố; sổ cái từ chối 99/99 bản sao thứ hai trong thử nghiệm 1.200 tờ; 168 bài kiểm thử và cổng kiểm chứng 9 bước, được xác nhận bằng 31 bài thử giả mạo.</li>
+      <li>Cài đặt tấn công sao chép tối ưu qua đẳng cự Stinespring (sai số kiểm chứng đến 1e-9); đánh giá thư viện ML-DSA; phân tích rủi ro lượng tử của Ethereum (EIP-8141, EIP-8355). Demo FastAPI chạy trên Railway; kế hoạch sáu giai đoạn được khách xác nhận bằng văn bản.</li>
+    </ul>
+    <p class="limits"><span class="en">Not claimed: a payment product, a world first, or quantum advantage.</span><span class="vi">Không khẳng định: đây là sản phẩm thanh toán, là lần đầu tiên trên thế giới, hay đạt lợi thế lượng tử.</span></p>
+  </article>
+</section>
+
+<section class="wrap">
+  <h2><span class="en">Research prototypes</span><span class="vi">Nguyên mẫu nghiên cứu</span></h2>
+
+  <article class="entry">
+    <p class="entry-dates"><span class="en">Oct 2026 — present</span><span class="vi">10/2026 — nay</span></p>
+    <h3><span class="en">Post-quantum crypto-policy gate</span><span class="vi">Cổng chính sách mật mã hậu lượng tử</span></h3>
+    <p class="org"><span class="en">Western Sydney University · research prototype under WSU IP</span><span class="vi">Đại học Western Sydney · nguyên mẫu nghiên cứu thuộc sở hữu trí tuệ WSU</span></p>
+    <ul class="en">
+      <li>Checks cryptographic configuration changes against a signed minimum standard before they take effect, with an AI-assisted migration-planning pipeline grounded in official government standards.</li>
+      <li>Six stages: standards knowledge base → signed customer profile → rule retrieval → constrained LLM drafting → deterministic plan verification → human approval and on-device enforcement.</li>
+      <li>Dual signatures (ML-DSA-65 + ECDSA P-384) on policies, approvals and audit records via liboqs and OpenSSL; hash-chained signed audit ledger; a watcher that detects silently replaced government standards.</li>
+      <li>Hybrid retrieval over SQLite FTS5 (BM25) and a locally run Qwen3 embedding model with reciprocal rank fusion; version- and date-aware retrieval over ASD ISM (OSCAL), NIST FIPS 203/204/205, NIST IR 8547, NSA CNSA 2.0, UK NCSC and EU guidance.</li>
+      <li>LLM safety by construction: schema-constrained generation with per-call vocabularies (invented algorithms or citations impossible), prompt-injection resistance tests, citation validation, forced "no rule found" abstention.</li>
+      <li>Adapters for RHEL crypto-policies, OpenShift TLS profiles, Java security settings and Debian OpenSSL; Raspberry Pi OS device agent via Ansible; Splunk/ServiceNow export. ~1,500 automated tests, reproducible fresh-clone builds, frozen tagged releases.</li>
+    </ul>
+    <ul class="vi">
+      <li>Kiểm tra các thay đổi cấu hình mật mã theo một chuẩn tối thiểu đã được ký trước khi chúng có hiệu lực, kèm pipeline lập kế hoạch chuyển đổi có AI hỗ trợ, dựa trên các chuẩn chính thức của chính phủ.</li>
+      <li>Sáu giai đoạn: kho tri thức chuẩn → hồ sơ khách hàng đã ký → truy xuất quy tắc → LLM soạn thảo có ràng buộc → xác minh kế hoạch theo quy tắc tất định → con người phê duyệt và thực thi trên thiết bị.</li>
+      <li>Ký đôi (ML-DSA-65 + ECDSA P-384) trên chính sách, phê duyệt và bản ghi kiểm toán qua liboqs và OpenSSL; sổ kiểm toán chuỗi băm có chữ ký; bộ giám sát phát hiện khi văn bản chuẩn của chính phủ bị thay thế âm thầm.</li>
+      <li>Truy xuất lai trên SQLite FTS5 (BM25) và mô hình embedding Qwen3 chạy cục bộ, gộp kết quả bằng reciprocal rank fusion; truy xuất theo phiên bản và theo ngày trên ASD ISM (OSCAL), NIST FIPS 203/204/205, NIST IR 8547, NSA CNSA 2.0, UK NCSC và hướng dẫn EU.</li>
+      <li>An toàn LLM ngay từ thiết kế: sinh nội dung ràng buộc theo schema với bộ từ vựng riêng cho từng lời gọi (không thể bịa ra thuật toán hay trích dẫn), kiểm thử khả năng chống prompt injection, xác thực trích dẫn, buộc trả lời "không tìm thấy quy tắc" khi không có căn cứ.</li>
+      <li>Bộ chuyển đổi cho RHEL crypto-policies, hồ sơ TLS OpenShift, cài đặt bảo mật Java và Debian OpenSSL; agent trên Raspberry Pi OS triển khai qua Ansible; xuất dữ liệu sang Splunk/ServiceNow. Khoảng 1.500 bài kiểm thử tự động, build tái lập được từ bản clone mới, các bản phát hành được đóng băng và gắn tag.</li>
+    </ul>
+    <p class="limits"><span class="en">Joint work under university IP; repository not public.</span><span class="vi">Công trình chung thuộc sở hữu trí tuệ đại học; kho mã không công khai.</span></p>
+  </article>
+
+  <article class="entry">
+    <p class="entry-dates"><span class="en">May 2025 — present</span><span class="vi">05/2025 — nay</span></p>
+    <h3><span class="en">HealthPQC — PQC migration framework for healthcare</span><span class="vi">HealthPQC — khung chuyển đổi PQC cho y tế</span></h3>
+    <p class="org">SWERI, Ingham Institute · SWSLHD</p>
+    <ul class="en">
+      <li>Benchmarked all NIST-standardised algorithms (FIPS 203, 204, 205, 206) across six clinical use cases on ARM64; empirically validated hybrid TLS at clinical scale — P99 <span class="metric">71 ms vs 71 ms</span> at 1,000 concurrent users, 180,423 requests, zero failures.</li>
+      <li>Automated CBOM scanner and certificate vulnerability tooling for Phase 1 cryptographic inventory; phased migration roadmap aligned to APRA CPG 234 and NIST IR 8547.</li>
+      <li>Full write-up on the <a href="research.html#pqc">research page</a>; code on the <a href="software.html">software page</a>.</li>
+    </ul>
+    <ul class="vi">
+      <li>Đo hiệu năng toàn bộ các thuật toán đã được NIST chuẩn hóa (FIPS 203, 204, 205, 206) cho sáu tình huống lâm sàng trên ARM64; kiểm chứng thực nghiệm TLS lai ở quy mô lâm sàng — P99 <span class="metric">71 ms so với 71 ms</span> ở 1.000 người dùng đồng thời, 180.423 yêu cầu, không lỗi.</li>
+      <li>Bộ quét CBOM tự động và công cụ rà soát lỗ hổng chứng chỉ phục vụ kiểm kê mật mã ở giai đoạn 1; lộ trình chuyển đổi theo từng giai đoạn đối chiếu APRA CPG 234 và NIST IR 8547.</li>
+      <li>Mô tả đầy đủ ở <a href="research.html#pqc">trang nghiên cứu</a>; mã nguồn ở <a href="software.html">trang phần mềm</a>.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <p class="entry-dates"><span class="en">Oct 2026 — present</span><span class="vi">10/2026 — nay</span></p>
+    <h3><span class="en">Verifiable Quantum Circuit Compilation — Kaggle</span><span class="vi">Verifiable Quantum Circuit Compilation — Kaggle</span></h3>
+    <p class="org">Google Quantum AI · <span class="en">4-person team</span><span class="vi">đội 4 người</span></p>
+    <ul class="en">
+      <li>Own the DQI task: Reed–Solomon decoder optimisation. Team repository and tooling set up by me. Competition in progress.</li>
+    </ul>
+    <ul class="vi">
+      <li>Phụ trách bài toán DQI: tối ưu bộ giải mã Reed–Solomon. Tôi thiết lập kho mã và công cụ cho cả đội. Cuộc thi đang diễn ra.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="wrap">
+  <h2><span class="en">Industry background</span><span class="vi">Kinh nghiệm trong ngành</span></h2>
+  <article class="entry">
+    <p class="entry-dates"><span class="en">May 2017 — Jul 2024 full-time · part-time since</span><span class="vi">05/2017 — 07/2024 toàn thời gian · bán thời gian từ đó</span></p>
+    <h3><span class="en">Operations Manager &amp; Network Security Engineer</span><span class="vi">Quản lý vận hành &amp; Kỹ sư an toàn mạng</span></h3>
+    <p class="org">IT Hardware Broker Pty Ltd, Sydney</p>
+    <ul class="en">
+      <li>Led SOC service delivery (Splunk SIEM, MITRE ATT&amp;CK, incident response) for 15+ B2B clients across <span class="metric">50+ environments</span> at 99.9% uptime on Palo Alto, Fortinet and Cisco architectures.</li>
+      <li>Built and secured the company's Cisco lab-management platform (Django, REST API, PostgreSQL) serving 150+ clients and 1,000+ daily transactions; delivered an ERP system end to end from schema design to live operation.</li>
+      <li>Python automation — SolarWinds integration, log analysis, alerting — reduced incident response time by <span class="metric">25%</span>.</li>
+    </ul>
+    <ul class="vi">
+      <li>Phụ trách vận hành dịch vụ SOC (Splunk SIEM, MITRE ATT&amp;CK, ứng cứu sự cố) cho hơn 15 khách hàng B2B trên <span class="metric">hơn 50 môi trường</span> với 99,9% thời gian hoạt động trên kiến trúc Palo Alto, Fortinet và Cisco.</li>
+      <li>Xây dựng và bảo mật nền tảng quản lý lab Cisco của công ty (Django, REST API, PostgreSQL) phục vụ hơn 150 khách hàng và hơn 1.000 giao dịch/ngày; triển khai trọn vẹn một hệ thống ERP, từ thiết kế cơ sở dữ liệu đến vận hành thực tế.</li>
+      <li>Tự động hóa Python — tích hợp SolarWinds, phân tích log, cảnh báo — giảm 25% thời gian ứng cứu sự cố.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="wrap">
+  <h2><span class="en">Other work</span><span class="vi">Công việc khác</span></h2>
+  <details>
+    <summary><span class="en">Digital transformation and ERP advisory, Vietnam</span><span class="vi">Tư vấn chuyển đổi số và ERP, Việt Nam</span></summary>
+    <div class="entry" style="margin-top:12px">
+      <ul class="en">
+        <li><strong>Commune-level digital transformation advisory</strong> — structured intake of ~50 government directives on digital transformation (decisions, plans, circulars) into a three-tier summary and register system for a commune administration.</li>
+        <li><strong>Construction-materials ERP and e-commerce</strong> — designed and built an inventory, quoting, receivables and CMS platform for a building-materials business (FastAPI, SQLAlchemy, Tailwind/Alpine.js, Railway).</li>
+      </ul>
+      <ul class="vi">
+        <li><strong>Tư vấn chuyển đổi số cấp xã</strong> — xử lý có hệ thống ~50 văn bản nhà nước về chuyển đổi số (quyết định, kế hoạch, công văn) thành hệ thống phiếu tóm tắt và sổ tổng hợp ba tầng cho một UBND xã.</li>
+        <li><strong>ERP và thương mại điện tử vật liệu xây dựng</strong> — thiết kế và xây dựng nền tảng kho, báo giá, công nợ và CMS cho một doanh nghiệp vật liệu xây dựng (FastAPI, SQLAlchemy, Tailwind/Alpine.js, Railway).</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="https://www.linkedin.com/in/gia-phat-dang-303866193" rel="me">LinkedIn</a>
+    <a href="https://github.com/GiaDang-GCT-TG-VN" rel="me">GitHub</a>
+  </div>
+  <p class="foot-email">30070831@westernsydney.edu.au</p>
+  <p><span class="en">© 2026 Gia Phat Dang · Sydney, Australia</span><span class="vi">© 2026 Gia Phat Dang · Sydney, Úc</span></p>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>
