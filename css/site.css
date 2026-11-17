@@ -1,3 +1,13 @@
+/* Width-matched stand-ins shown until IBM Plex arrives, so text wraps the
+   same before and after the swap (prevents font-swap layout shift). */
+@font-face { font-family: "Plex Serif Fallback"; src: local("Georgia"); font-weight: 400; font-style: normal; size-adjust: 91.1%; }
+@font-face { font-family: "Plex Serif Fallback"; src: local("Georgia Italic"), local("Georgia-Italic"); font-weight: 400; font-style: italic; size-adjust: 89.6%; }
+@font-face { font-family: "Plex Serif Fallback"; src: local("Georgia Bold"), local("Georgia-Bold"); font-weight: 500 700; font-style: normal; size-adjust: 94.1%; }
+@font-face { font-family: "Plex Sans Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 400; size-adjust: 100.9%; }
+@font-face { font-family: "Plex Sans Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 500; size-adjust: 103%; }
+@font-face { font-family: "Plex Sans Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 600 700; size-adjust: 97%; }
+@font-face { font-family: "Plex Mono Fallback"; src: local("Courier New"), local("CourierNewPSMT"); size-adjust: 100%; }
+
 :root {
   --paper: #FBFAF7;
   --ink: #1A1D2A;
@@ -6,9 +16,9 @@
   --iris-soft: #EEEDFA;
   --muted: #6A6F80;
   --hairline: #E5E2DA;
-  --serif: "IBM Plex Serif", Georgia, serif;
-  --sans: "IBM Plex Sans", -apple-system, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --serif: "IBM Plex Serif", "Plex Serif Fallback", Georgia, serif;
+  --sans: "IBM Plex Sans", "Plex Sans Fallback", -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "Plex Mono Fallback", ui-monospace, monospace;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
@@ -19,7 +29,12 @@ body {
 }
 .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
 a { color: var(--iris); text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* underline grows from the left on hover; colour never changes */
+a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%; background-repeat: no-repeat; background-size: 0 1px;
+}
+a:hover { background-size: 100% 1px; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--iris); outline-offset: 3px; border-radius: 2px; }
 .lang button:focus-visible { outline-offset: 1px; }
 .skip { position: absolute; left: 12px; top: -48px; z-index: 20; background: var(--iris); color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.9rem; }
@@ -42,8 +57,8 @@ nav.site {
 }
 .nav-name { font-family: var(--serif); font-weight: 600; font-size: 1.02rem; color: var(--ink); margin-right: auto; }
 .nav-inner a:not(.nav-name) { color: var(--muted); font-size: 0.9rem; }
-.nav-inner a:not(.nav-name):hover { color: var(--iris); text-decoration: none; }
-.nav-inner a.active { color: var(--ink); font-weight: 500; border-bottom: 2px solid var(--iris); padding-bottom: 1px; }
+.nav-inner a:not(.nav-name) { background-image: linear-gradient(var(--iris), var(--iris)); }
+.nav-inner a.active { background-image: none; color: var(--ink); font-weight: 500; border-bottom: 2px solid var(--iris); padding-bottom: 1px; }
 .lang {
   font-family: var(--mono); font-size: 0.78rem; border: 1px solid var(--hairline);
   border-radius: 999px; padding: 3px 4px; display: inline-flex; background: #fff;
@@ -71,13 +86,28 @@ header.hero { padding: 72px 24px 56px; border-bottom: 1px solid var(--hairline);
   font-family: var(--mono); font-size: 0.83rem; border: 1px solid var(--hairline); border-radius: 999px;
   padding: 7px 15px; color: var(--ink); background: #fff; transition: border-color .15s, color .15s;
 }
-.hero-links a:hover { border-color: var(--iris); color: var(--iris); text-decoration: none; }
+.hero-links a:hover { border-color: var(--iris); color: var(--iris); }
 .hero-links a.primary { background: var(--iris); border-color: var(--iris); color: #fff; }
 .hero-links a.primary:hover { background: var(--iris-dark); }
 .hero-links a.primary:focus-visible { outline-color: var(--ink); }
 
 .circuit { margin: 44px 0 0; }
 .circuit svg { width: 100%; height: auto; display: block; }
+
+/* hero stage: height is reserved before the Bloch sphere loads (no layout shift) */
+.stage { position: relative; }
+.bloch { display: none; position: absolute; inset: 0; cursor: grab; touch-action: pan-y; }
+.bloch.is-dragging { cursor: grabbing; }
+.bloch canvas { display: block; width: 100%; height: 100%; }
+.bloch-label {
+  position: absolute; left: 0; top: 0; pointer-events: none; user-select: none;
+  font-family: var(--mono); font-size: 0.8rem; color: var(--ink); white-space: nowrap;
+}
+@media (min-width: 480px) {
+  .stage { height: clamp(280px, 44vw, 360px); display: flex; align-items: center; }
+  .stage.is-3d > svg { display: none; }
+  .stage.is-3d .bloch { display: block; }
+}
 .circuit .wire { stroke: var(--hairline); stroke-width: 1.5; }
 .circuit .gate-box { fill: var(--paper); stroke: var(--ink); stroke-width: 1.3; }
 .circuit .gate-t { fill: var(--iris-soft); stroke: var(--iris); }
@@ -187,5 +217,23 @@ details[open] summary::before { content: "− "; }
 footer { padding: 44px 0 64px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--hairline); }
 footer .foot-links { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 16px; }
 footer a { color: var(--muted); }
-footer a:hover { color: var(--iris); }
 .foot-email { font-family: var(--mono); font-size: 0.85rem; }
+
+/* ---- micro-motion (all of it off under prefers-reduced-motion) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  a { transition: background-size .22s ease; }
+  .hero-links a { transition: border-color .15s ease, color .15s ease, background-color .15s ease, transform .15s ease; }
+  .hero-links a:hover { transform: translateY(-1px); }
+  .stage.is-3d .bloch { animation: bloch-in .5s ease both; }
+  @keyframes bloch-in { from { opacity: 0; } to { opacity: 1; } }
+
+  /* one-time reveal; .reveal-on is only set by js/motion.js */
+  .reveal-on .theme, .reveal-on .repo, .reveal-on .pub {
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .45s ease, transform .45s ease;
+  }
+  .reveal-on .theme.is-in, .reveal-on .repo.is-in, .reveal-on .pub.is-in { opacity: 1; transform: none; }
+}
+@media print {
+  .reveal-on .theme, .reveal-on .repo, .reveal-on .pub { opacity: 1 !important; transform: none !important; }
+}
